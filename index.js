@@ -5,7 +5,7 @@ const cors = require("cors");
 const quotes = require("./quotes.json");
 const fs = require("fs");
 
-let arrLength = quotes.length;
+let arrLength = quotes.quotes.length;
 app.listen(PORT, () => {
   console.log(`alive on http://localhost:${PORT}`);
   console.log(arrLength);
@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.get("/tateQuote", (req, res) => {
   let rand = Math.floor(Math.random() * arrLength) - 1;
-  res.status(200).send(quotes[rand]);
+  res.status(200).send(quotes.quotes[rand]);
 });
 app.post("/tateQuote", (req, res) => {
   let newQuote = JSON.stringify(req.body, null, 2);
