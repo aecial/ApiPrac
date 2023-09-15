@@ -22,13 +22,18 @@ app.get("/tateQuote", (req, res) => {
   res.status(200).send(quotes.quotes[rand]);
 });
 app.post("/tateQuote", (req, res) => {
-  let newQuote = JSON.stringify(req.body, null, 2);
-  fs.appendFile("./quotes.json", newQuote, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("File Write Success");
-    }
+  let NEW = req.body;
+  quotes.quotes.push(NEW);
+  fs.writeFile("./quotes.json", JSON.stringify(quotes), (err) => {
+    console.log(err);
   });
+  // let newQuote = JSON.stringify(req.body, null, 2);
+  // fs.appendFile("./quotes.json", newQuote, (err) => {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log("File Write Success");
+  //   }
+  // });
   res.status(201).send({ requestBody: req.body });
 });
